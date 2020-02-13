@@ -1,0 +1,35 @@
+{
+  "contextRoot": "",
+  "internalPort": "",
+  "healthCheck": "",
+  "internalDebugPort": "",
+  "isHttps": false,
+  "ignoredPaths": [
+    "/.project",
+    "/target",
+    "/Dockerfile-tools",
+    "/cli-config.yml",
+    "/README.md",
+    "/Jenkinsfile",
+    "/.m2",
+    "/load-test*",
+    "*/node_modules*",
+    "*/.git/*",
+    "*/.DS_Store",
+    "*/*.swp",
+    "*/*.swx",
+    "*/4913",
+    "*/.dockerignore",
+    "*/.gitignore",
+    "*/*~",
+    "/.settings",
+    "/localm2cache.zip"
+  ],
+  "mavenProfiles": [
+    ""
+  ],
+  "mavenProperties": [
+    ""
+  ],
+  "statusPingTimeout": ""
+}
