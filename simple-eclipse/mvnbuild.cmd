@@ -1,0 +1,1 @@
+docker run --rm -v %CD%:/usr/src/mymaven  -v "C:\Users\Izaak de Hullu\.m2":/root/.m2  -w /usr/src/mymaven maven:3.6.3-jdk-11-slim  mvn clean package

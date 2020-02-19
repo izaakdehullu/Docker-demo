@@ -1,0 +1,21 @@
+version: '3.7'
+networks:
+  traefik:
+    name: traefik
+services:
+  traefik:
+    image: 'traefik:v2.0.1'
+    container_name: 'traefik'
+    networks:
+      - traefik
+    ports:
+      - '80:80' # The HTTP port
+      - '8080:8080' # The Web UI (enabled by --api)
+    command:
+      - '--log.level=DEBUG'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - ./traefik.yaml:/etc/traefik/traefik.yaml
+networks:
+  traefik:
+    external: true

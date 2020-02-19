@@ -1,0 +1,1 @@
+ docker run --name ebxDatabase -v $HOME/vols/pgadmin4:/var/lib/pgadmin -e POSTGRES_PASSWORD=ebx -p 5432:5432 -d postgres

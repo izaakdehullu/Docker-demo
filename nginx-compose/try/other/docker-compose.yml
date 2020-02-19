@@ -1,0 +1,12 @@
+version: '3.7'
+networks:
+  traefik:
+    external: true
+services:
+  whoami2:
+    image: containous/whoami
+    container_name: 'whoami2'
+    networks:
+      - 'traefik'
+    labels:
+      - 'traefik.http.routers.whoami2.rule=Host(`whoami2.docker.localhost`)'
