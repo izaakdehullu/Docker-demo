@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: oracle/database:12.2.0.1-ee
+    environment:
+      - ORACLE_PWD=ebx
+    ports:
+      - 1521:1521
+      - 5500:5500
+    volumes:
+      - db-data:/u01/app/oracle
+      - /mnt/c/Workspaces/Docker/oracle-ebx/scripts-setup:/opt/oracle/scripts/setup
+    networks:
+      - backend
+
+  wildfly:
+    image: wildfly/oracle12c-ebx
+    environment:
+      - DB_PORT=1521
+    ports:
+      - 8080:8080
+      - 9990:9990
+    networks:
+      - backend
+    depends_on:
+      - db
+
+networks:
+  backend:
+
+volumes:
+  db-data:

@@ -1,0 +1,22 @@
+#
+#
+#   Part of the config that needs to be run only once
+#
+#
+
+embed-server --std-out=echo --server-config=standalone.xml
+
+batch
+
+module add --name=com.oracle.ojdbc --resources=/opt/wildfly/modules/system/layers/base/com/oracle/ojdbc/main/ojdbc7.jar --dependencies=javax.api,javax.transaction.api
+
+/subsystem=datasources/jdbc-driver=oracle:add(driver-name="oracle",driver-module-name="com.oracle.ojdbc",driver-class-name=oracle.jdbc.driver.OracleDriver)
+
+# remove default unnecessary things!
+/subsystem=datasources/jdbc-driver=h2:remove
+/subsystem=datasources/data-source=ExampleDS/:remove
+/subsystem=ee/service=default-bindings:undefine-attribute(name=datasource)
+
+/subsystem=datasources/data-source=EBX_REPOSITORY/:add(jta=true,connection-url=jdbc:oracle:thin:@${env.DB_HOST}:${env.DB_PORT}/${env.SERVICENAME},driver-name=oracle,jndi-name=java:/EBX_REPOSITORY,user-name=ebx,password=oracle)
+
+run-batch
