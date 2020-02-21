@@ -1,32 +1,68 @@
-version: '3'
+version: '3.5'
+
 services:
-  db:
-    image: oracle/database:12.2.0.1-ee
+  postgres:
+    container_name: postgres_container
+    image: postgres
     environment:
-      - ORACLE_PWD=ebx
-    ports:
-      - 1521:1521
-      - 5500:5500
+      POSTGRES_USER: ebx
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_DB: ebxDatabase
+      PGDATA: /data/postgres
+    secrets:
+      - db_password
     volumes:
-      - db-data:/u01/app/oracle
-      - /mnt/c/Workspaces/Docker/oracle-ebx/scripts-setup:/opt/oracle/scripts/setup
+      - postgres:/data/postgres
+    ports:
+      - '5432:5432'
     networks:
-      - backend
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: izaakdehullu@systemation.nl
+      PGADMIN_DEFAULT_PASSWORD: ebx
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - '5050:80'
+    networks:
+      - postgres
+    restart: unless-stopped
 
   wildfly:
-    image: wildfly/oracle12c-ebx
+    container_name: wildfly_ebx
+    image: wildfly/postgres
     environment:
-      - DB_PORT=1521
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ebxDatabase
+      DB_USER: ebx
+      DB_PWD: ebx
+    volumes:
+      - ./ebx:/opt/ebx/
+      - ./deployments:/opt/wildfly/standalone/deployments/
     ports:
-      - 8080:8080
-      - 9990:9990
+      - '9990:9990'
+      - '8888:8080'
+      - '8787:8787'
     networks:
-      - backend
+      - postgres
     depends_on:
-      - db
+      - postgres
+    restart: unless-stopped
 
 networks:
-  backend:
+  postgres:
+    driver: bridge
 
 volumes:
-  db-data:
+  postgres:
+  pgadmin:
+
+secrets:
+  db_password:
+    file: ./POSTGRES_PASSWORD

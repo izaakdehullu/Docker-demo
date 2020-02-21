@@ -16,8 +16,6 @@ USER wildfly
 COPY standalone.conf bin/
 
 # Datasource settings
-# RUN mkdir -p modules/system/layers/base/com/oracle/ojdbc/main/ 
-# COPY ojdbc7.jar modules/system/layers/base/com/oracle/ojdbc/main/
 RUN mkdir -p modules/system/layers/base/org/postgres/main/
 COPY postgresql-42.2.6.jar modules/system/layers/base/org/postgres/main/
 
@@ -29,7 +27,7 @@ ADD wildfly-static-config.cli /tmp/wildfly-static-config.cli
 RUN ${WILDFLY_HOME}/bin/jboss-cli.sh --file=/tmp/wildfly-static-config.cli && \
     rm -rf /opt/wildfly/standalone/configuration/standalone_xml_history/
 
-#VOLUME /opt/ebx
-#VOLUME /opt/wildfly/bin
+VOLUME /opt/ebx
+VOLUME /opt/wildfly/standalone/deployments
 
 CMD ["/opt/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
