@@ -1,10 +1,13 @@
 #### Simpele voorbeelden
 
 ```shell
-docker run --rm -it wernight/funbox nyancat
-docker run --rm -it wernight/funbox asciiquarium
-docker run --rm -it wernight/funbox sh -c "figlet Systemation | boxes |toilet --gay 
--f term"
+$ docker pull hello-world:latest
+$ docker container run --rm hello-world
 ```
-font enzo: https://gist.github.com/LunaCodeGirl/6707775
 
+```shell
+$ docker container run --rm -it wernight/funbox asciiquarium
+$ docker container  run --rm -it wernight/funbox sh -c "figlet Systemation Rules | boxes | toilet --gay -f term"
+```
+
+[fonts](https://gist.github.com/LunaCodeGirl/6707775)
