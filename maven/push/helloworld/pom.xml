@@ -89,7 +89,7 @@
             <id>docker:run</id>
             <phase>install</phase>
             <goals>
-              <goal>push</goal>
+              <!-goal>push</!-goal>
               <goal>run</goal>
             </goals>
           </execution>
