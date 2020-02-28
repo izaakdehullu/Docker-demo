@@ -1,12 +1,13 @@
 ### pushen image
 
-1. Login op dockerhub ihullu (clear repository op dockerhub)
-2. Maken image: `docker build -t ihullu/devops-hello-world:0.32.0 .`
-3. Push image: `docker push ihullu/devops-hello-world:0.32.0`
+1. Login op dockerhub ihullu (clear repository op dockerhub) [dockerhub](https://hub.docker.com/repository/docker/ihullu/devops-hello-world)
+2. Tonen inhoud van de dockerfile
+3. Maken image: `docker build -t ihullu/devops-hello-world:0.32.0 .`
+4. Push image: `docker push ihullu/devops-hello-world:0.32.0`
    (docker login)
-4. Checken in repository
-5. Verwijder image lokaal
-6. run image: 'docker container run ihullu/devops-hello-world:0.32.0
+5. Checken in repository
+6. Verwijder image lokaal
+7. run image: 'docker container run ihullu/devops-hello-world:0.32.0
 
 #### Tonen van de lagen
 

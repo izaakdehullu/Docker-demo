@@ -19,6 +19,12 @@ module add --name=org.postgresql --resources=/opt/wildfly/modules/system/layers/
 
 #/subsystem=datasources/data-source=EBX_REPOSITORY/:add(jta=true,#connection-url=jdbc:oracle:thin:@${env.DB_HOST}:${env.DB_PORT}/${env.SERVICENAME},#driver-name=oracle,jndi-name=java:/EBX_REPOSITORY,user-name=ebx,password=oracle)
 
-data-source add --jta=true --jndi-name=java:/EBX_REPOSITORY --name=EBX_REPOSITORY --connection-url=jdbc:postgresql://${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME} --driver-name=postgres --user-name=${env.DB_USER} --password=${env.DB_PWD}
+#data-source add --jta=false --jndi-name=java:/EBX_REPOSITORY --name=EBX_REPOSITORY --connection-url=jdbc:postgresql://${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME} --driver-name=postgres --user-name=${env.DB_USER} --password=${env.DB_PWD}
+
+
+#http://www.mastertheboss.com/jboss-server/jboss-datasource/configuring-a-datasource-with-postgresql-and-jboss-wildfly
+
+#/subsystem=datasources/data-source=EBX_REPOSITORY/:write-attribute(name=max-pool-size,value=50)
+#/subsystem=datasources/data-source=EBX_REPOSITORY/:write-attribute(name=max-pool-size,value=10)
 
 run-batch

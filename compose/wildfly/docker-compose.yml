@@ -5,25 +5,23 @@ services:
     container_name: postgres_container
     image: postgres
     environment:
-      POSTGRES_USER: ebx
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-      POSTGRES_DB: ebxDatabase
+      POSTGRES_USER: 'ebx'
+      POSTGRES_PASSWORD: 'ebx'
+      POSTGRES_DB: 'ebxDatabase'
       PGDATA: /data/postgres
-    secrets:
-      - db_password
     volumes:
       - postgres:/data/postgres
     ports:
       - '5432:5432'
     networks:
       - postgres
-    restart: unless-stopped
+    restart: always
 
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: izaakdehullu@systemation.nl
+      PGADMIN_DEFAULT_EMAIL: a@b.nl
       PGADMIN_DEFAULT_PASSWORD: ebx
     volumes:
       - pgadmin:/root/.pgadmin
@@ -62,7 +60,3 @@ networks:
 volumes:
   postgres:
   pgadmin:
-
-secrets:
-  db_password:
-    file: ./POSTGRES_PASSWORD
