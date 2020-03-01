@@ -11,8 +11,4 @@ $ docker build -t ihullu/catnip .
 $ docker run -p 8888:5000 ihullu/catnip
 ```
 
-#### Tonen van de lagen
 
-```shell
-$ docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock  ihullu/catnip  wagoodman/dive:latest     --source docker
-```
